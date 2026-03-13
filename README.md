@@ -1,20 +1,26 @@
----
-title: "Binary Search HTML Encoding"
-output: github_document
----
+# Binary Search
 
-# HTML Encoding Map
+## Complexity
 
-The Binary Search page is encoded as a single algorithm card with this order:
+- Best: O(n log n)
+- Worst: O(n log n)
+- Avg: O(n log n)
+- Space: O(n)
 
-1. `\<title>` and the visible card heading both identify the algorithm as "Binary Search".
-2. The button bar contains the project navigation links and the complexity stat boxes.
-3. `Problem Description` explains that the page first sorts a copy of the input array, then runs binary search on that sorted copy.
-4. `Code` is rendered through `\<pre class="codeBox"><code id="codeBox"></code></pre>`, which is populated from `main.js`.
-5. `Algorithm Steps` is an unordered list where every step uses `\<li><p>...\</p></li>`.
-6. `Explanation` states that binary search is `O(log n)` by itself, but the full page example is `O(n log n)` because it includes merge sort.
-7. `Example/Demo` is a `\<pre>` block with the `exampleBox` id for runtime output.
+## Problem Description
 
-# Structural Notes
+This page demonstrates binary search on a sorted copy of an input array. Binary search itself repeatedly compares the target to the middle value of the current search range and discards half of the remaining values after each comparison. Because the example begins with an unsorted array, it first sorts the data with merge sort and then performs binary search on that sorted result.
 
-The page uses `data-source="./main.js"` and `data-runtime="javascript"` on the `body` element so the viewer can load the displayed source code. The list markup is normalized so each step paragraph is wrapped inside its own list item.
+## Algorithm Steps
+
+1. Copy the original array and sort that copy with merge sort so the data satisfies binary search's sorted input requirement.
+2. Initialize `low` to the first index and `high` to the last index of the sorted array.
+3. Compute the middle index of the current search range.
+4. If the middle value matches the target, return that index from the sorted array.
+5. If the target is smaller than the middle value, move the search range left by setting `high = mid - 1`.
+6. If the target is larger than the middle value, move the search range right by setting `low = mid + 1`.
+7. Repeat until the target is found or the search range becomes empty.
+
+## Explanation
+
+Binary search alone runs in `O(log n)` time because every comparison eliminates half of the remaining search range. In this implementation, however, the program first sorts the array with merge sort, which costs `O(n log n)` time and `O(n)` extra space. That sorting step dominates the total runtime, so the full example on this page runs in `O(n log n)` time and returns the target's index in the sorted copy, not in the original unsorted array.
