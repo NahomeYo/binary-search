@@ -126,4 +126,6 @@ The key requirement for binary search is that the data must already be sorted. O
 
 In this implementation, though, the full program does more than just search. It first uses merge sort to turn the unsorted input into a sorted copy. That sorting step takes `O(n log n)` time and `O(n)` extra space. After that, binary search runs on the sorted array and returns the position of the target inside that sorted version of the data, not its original position in the unsorted array.
 
+In the JavaScript code, `Math.floor()` is used to compute the middle index, and the merge sort helper uses `slice()` to break the array into left and right halves. After the merge loop finishes, `concat()` is used to attach the remaining values. Those functions help keep the implementation clean, but they also make it clear why this full example uses extra memory compared with a binary search that starts with data that is already sorted.
+
 Because merge sort is more expensive than binary search, the sorting work dominates the overall runtime. That is why the complexity shown on this page is `O(n log n)` for the full example, even though the actual binary search step is only `O(log n)`.
